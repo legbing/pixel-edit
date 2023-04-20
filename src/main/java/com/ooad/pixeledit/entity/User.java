@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.util.ArrayList;
 import java.util.List;
 
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -30,11 +31,23 @@ public class User
     @Column(nullable=false)
     private String password;
 
+    @Column(nullable=false)
+    private String address;
+
+    @Column(nullable=false)
+    private String UserType;
+
+   
     @ManyToMany(fetch = FetchType.EAGER, cascade=CascadeType.ALL)
     @JoinTable(
             name="users_roles",
-            joinColumns={@JoinColumn(name="USER_ID", referencedColumnName="ID")},
-            inverseJoinColumns={@JoinColumn(name="ROLE_ID", referencedColumnName="ID")})
+           joinColumns={@JoinColumn(name="USER_ID")},//, referencedColumnName="ID")},
+            inverseJoinColumns={@JoinColumn(name="ROLE_ID")}//, referencedColumnName="ID")}
+            )
     private List<Role> roles = new ArrayList<>();
 
+    
+
+
+    //private List<Role> roles;
 }
