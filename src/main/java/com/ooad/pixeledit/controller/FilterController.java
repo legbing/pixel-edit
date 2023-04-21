@@ -59,7 +59,11 @@ public class FilterController
         List<Filter> filters = filterRepository.findAll();
         System.out.println(filters);
         model.addAttribute("filters", filters);
-        path = Paths.get("./uploads") + "//" + path;
+        // check if path starts with uploads
+        if(!path.startsWith(".\\uploads"))
+        {
+            path = Paths.get("./uploads") + "//" + path;
+        }
         model.addAttribute("path", path);
         return "edit";
     }
