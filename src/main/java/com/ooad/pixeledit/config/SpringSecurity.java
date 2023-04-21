@@ -12,15 +12,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
-
 @Configuration
 @EnableWebSecurity
 public class SpringSecurity {
 
     @Autowired
     private UserDetailsService userDetailsService;
-
-  
 
     @Bean
     public static PasswordEncoder passwordEncoder(){
@@ -33,7 +30,14 @@ public class SpringSecurity {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
+                                .requestMatchers("/editimage").permitAll()
+                                .requestMatchers("/apply").permitAll()
+                                .requestMatchers("/addfilter").hasRole("ADMIN")
+                                .requestMatchers("/add_filter/save").hasRole("ADMIN")
+                                .requestMatchers("/users").hasRole("ADMIN")
                                 .requestMatchers("/images/**").hasRole("ADMIN")
+                                .requestMatchers("/review_images").hasRole("ADMIN")
+                                .requestMatchers("/review").hasRole("ADMIN")
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
