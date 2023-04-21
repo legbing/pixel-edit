@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0" />
+  <title>Spring Boot Image Upload example</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}" />
+  <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+  <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+  <style>
+body {
+  margin:0px;
+  height:100vh;
+  background: #d4d9c0;
+}
+.container {
+  margin-left: 40%;
+  margin-top: 10%;
+  height:500px;
+  width: 300px;
+  display:flex;
+  flex-direction: column;
+  align-items:center;
+  justify-content:center;
+
+}
+#uploadForm {
+  padding: 20px;
+  width: 500px;
+  height:500px;
+  background:#fff;
+  box-shadow: -3px -3px 7px rgba(94, 104, 121, 0.377),
+              3px 3px 7px rgba(94, 104, 121, 0.377);
+}
+#uploadForm img {
+  width:100%;
+  display:none;
+  margin-bottom:30px;
+}
+#uploadForm input {
+  display:none;
+}
+
+#uploadForm label {
+  display:block;
+  width:50%;
+  height:30px;
+  margin-left: 0%;
+  text-align:center;
+  background:#4799bb;
+  border: 1px solid black;
+  font-family:"Open Sans",sans-serif;
+  border-radius:10px;
+  cursor:pointer;
+}
+  </style>
+</head>
+
+<body>
+  <h3 class="mb-3">Upload the image to apply filters</h3>
+  <div class="container">
+    <form  
+      id="uploadForm"
+      method="post"
+      th:action="@{/images/upload}"
+      enctype="multipart/form-data">
+      <div class="preview">
+        <img id="file-ip-1-preview">
+      </div>
+      <div id="uploadbar" style="display: flex; flex-direction: row;position:relative;top:200px;">
+      <label for="file-ip-1">CHOOSE IMAGE</label>&emsp;&emsp;
+      <input id="file-ip-1" type="file" name="file" accept="image/png, image/jpeg" onchange="previewImage(event);"/>
+      <button class="btn btn-sm btn-outline-success float-right" style="cursor:pointer;border-radius:10px;height:30px;width:50%;background-color: #4799bb;" type="submit">
+        UPLOAD
+      </button>
+      </div>
+    </form>
+
+    <div
+      th:if="${message != null}"
+      class="alert alert-secondary alert-dismissible fade show text-center message mt-3"
+      role="alert">
+      [[${message}]]
+      <button type="button"  class="close btn-sm" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  </div>
+<script>
+  const previewImage = (event) => {
+    if(event.target.files.length > 0){
+    var src = URL.createObjectURL(event.target.files[0]);
+    var preview = document.getElementById("file-ip-1-preview");
+    var uploadbar = document.getElementById("uploadbar");
+    preview.src = src;
+    preview.style.width = '500px';
+    preview.style.height = '400px';
+    preview.style.display = "block";
+    uploadbar.style.top = '10px';
+  }
+};
+
+</script>
+</body>
+
+</html>

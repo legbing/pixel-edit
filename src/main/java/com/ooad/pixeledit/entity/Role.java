@@ -25,4 +25,7 @@ public class Role
 
     @ManyToMany(mappedBy="roles")
     private List<User> users;
+
+    //@OneToMany(mappedBy="roles")
+    //private List<User> users;
 }

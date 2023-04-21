@@ -66,7 +66,7 @@ public class User {
         this.email = email;
     }
 
-    public String setAddress(String address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 }
