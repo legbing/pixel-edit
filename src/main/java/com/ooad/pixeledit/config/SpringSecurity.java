@@ -38,6 +38,7 @@ public class SpringSecurity {
                                 .requestMatchers("/images/**").hasRole("ADMIN")
                                 .requestMatchers("/review_images").hasRole("ADMIN")
                                 .requestMatchers("/review").hasRole("ADMIN")
+                                .requestMatchers("/download").permitAll()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")
