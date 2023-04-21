@@ -67,11 +67,11 @@ public class UserDto
             this.approval = approval;
         }
     
-        public boolean getCameraUsed() {
+        public boolean approval() {
             return approval;
         }
     
-        public void setCameraUsed(boolean approval) {
+        public void approval(boolean approval) {
             this.approval= approval;
         }
     }
@@ -87,7 +87,7 @@ public class UserDto
             return department;
         }
     
-        public void setCameraUsed(String department) {
+        public void department(String department) {
             this.department = department;
         }
     }
