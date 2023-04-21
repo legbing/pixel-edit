@@ -56,6 +56,15 @@ public class ImageController {
     return "redirect:/editimage";
   }
 
+@GetMapping("/download")
+  public ResponseEntity<Resource> getImage(@RequestParam String path) {
+    path = path.substring(11);
+    System.out.println(path);
+    Resource file = storageService.load(path);
+
+    return ResponseEntity.ok()
+        .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+  }
 
     
 }
